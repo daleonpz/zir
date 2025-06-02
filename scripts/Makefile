@@ -27,7 +27,7 @@ BOARD ?= $(DEFAULT_BOARD)
 # Application Directory
 DEFAULT_APP_DIR ?= app
 APP_DIR ?= $(DEFAULT_APP_DIR)
-APP_DOMAIN ?= $(DEFAULT_APP_DIR)
+APP_DOMAIN ?= $(APP_DIR)
 
 # West build directories
 APP_BUILD_DIR ?= build

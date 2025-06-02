@@ -103,6 +103,9 @@ if [ $? -ne 0 ]; then
     exit 1
 fi
 
+echo "     Copying Makefile to nRF Connect SDK directory"
+cp ${SCRIPT_DIR}/Makefile ${HOME}/ncs/${NRFTOOL_SDK_CONNECT_VERSION}/
+
 # NOT NECESSARY: sdk-manager installs the nRF Connect SDK and its dependencies.
 # nrfutil sdk-manager toolchain launch --ncs-version ${NRFTOOL_SDK_CONNECT_VERSION} --shell
 
