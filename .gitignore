@@ -1,0 +1,108 @@
+# Generated Files
+**/buildresults/**
+**/build/**
+
+# MCU tools
+STMicroelectronics/
+scripts/en.stm32cubeprg-lin-v2-19-0.zip
+scripts/JLink_Linux_V794i_x86_64.tgz
+scripts/nrfconnect-*.AppImage
+scripts/nrfconnect-*.appimage
+nrftools/
+.nrfconnect-apps/
+JLink
+.nrfutil/
+jlink_sniffer/
+scripts/JLink_Linux_V818_x86_64.tgz
+scripts/nrfutil
+
+# Nix-generated Files 
+typescript
+.vim/
+.viminfo
+.env/
+
+# Zepyhr-generated Files
+ncs/
+bootloader/
+modules/
+zephyr/
+tools/
+.cmake/
+.west/
+zephyr-sdk/
+.wget-hsts
+.local-home/
+build-*/
+
+# Sublime-generated Files
+*.sublime-workspace
+
+#######################
+# Python Ignore Rules #
+#######################
+*.pyc
+*.pyo
+*.pyd
+__pycache__/
+.python-version
+
+########################
+# C / C++ Ignore Rules #
+########################
+
+# OS Files
+
+.DS_Store
+
+# Prerequisites
+*.d
+
+# Compiled Object files
+*.slo
+*.lo
+*.o
+*.obj
+
+# Precompiled Headers
+*.gch
+*.pch
+
+# Compiled Dynamic libraries
+*.so
+*.dylib
+*.dll
+
+# Fortran module files
+*.mod
+*.smod
+
+# Compiled Static libraries
+*.lai
+*.la
+*.a
+*.lib
+
+# Executables
+*.exe
+*.out
+*.app
+
+# Clang
+.cache/
+
+#######################
+# KiCad Ignore Rules #
+#######################
+hardware/lightmyography/ligthmyography_sensor-backups/
+*.bak
+\#auto_saved_files#
+gerber.zip
+
+
+hardware/python/cheeks/
+hardware/python/normal/
+hardware/python/sterno_parallel/
+hardware/python/sterno_transversal/
+hardware/python/stress/
+
