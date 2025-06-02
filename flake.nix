@@ -94,6 +94,8 @@
               echo -e '\033[31m\t\tsudo ln -sf ~/JLink/JLink_Linux_V818_x86_64/* /opt/SEGGER/JLink/\033[0m'
             fi
             echo -e '\033[32m Zephyr development environment is ready!\033[0m'
+            echo -e '\033[32m You can now run west commands or build your projects.\033[0m'
+            echo -e '\033[5;1;32m ==== NOTE: Place your app/ under ncs/<sdk_version> directory.====\033[0m'
         '';
         };
     };
