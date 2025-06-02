@@ -1,6 +1,6 @@
-# Wearable Bruxism
+# Zephyr nRF Connect Development Environment
 
-This project is a wearable device application built with Zephyr RTOS to detect and monitor bruxism (teeth grinding) using a sensor on the STM32WB55RG board. It includes an Over-The-Air (OTA) update feature for easy firmware updates. The project is useful for developers creating health-monitoring wearables, offering a lightweight, real-time solution with low power consumption.
+This project is designed to be built and run using Nix, providing a reproducible development environment for Zephyr RTOS and nRF Connect SDK. It includes scripts for building the application and MCUboot bootloader.
 
 ## Table of Contents
 
@@ -11,25 +11,22 @@ This project is a wearable device application built with Zephyr RTOS to detect a
     - [Getting the Source](#getting-the-source)
     - [Building](#building)
     - [Testing](#testing)
-- [Documentation](#documentation)
 - [Contributing](#contributing)
 - [Authors](#authors)
 - [License](#license)
 - [Acknowledgments](#acknowledgments)
 -[Extras](#extras)
-    - [Data Collection](#data-collection)
     - [BLE Sniffer](#ble-sniffer)
 
 ## About the Project
 
-The Wearable Bruxism project is a Zephyr-based application that detects teeth grinding using sensors on the STM32WB55RG board. It supports OTA updates via a bootloader (mcuboot), making it easy to update firmware wirelessly. Key features include:
+This project is ideal for developers working with Nordic Semiconductors MCUs, especially those focusing on embedded systems and IoT applications. It simplifies the setup process and ensures that all dependencies are managed consistently across different development environments. It includes:
 
-- Real-time bruxism detection with low power consumption.
-- OTA firmware updates using mcuboot.
-- Data collection for normal and stress-related samples, saved in CSV format.
-- Visualization tools for analyzing sensor data in real-time or post-collection.
+- A Nix-based development environment for reproducibility.
+- Scripts for building Zephyr and NSC applications and MCUboot.
+- Installation scripts for nRF Connect SDK, nrfutil and Zephyr SDK.
+- JLink support for debugging and programming.
 
-This project is ideal for developers working on wearable health devices, providing a foundation for sensor-based monitoring with OTA capabilities.
 
 **[Back to top](#table-of-contents)**
 
@@ -135,30 +132,72 @@ git lfs pull
    nix develop .
    ```
 
-2. Build the application, bootloader, or both:
+2. Clone your application:
+   
+   ```bash
+   cd ncs/sdk-version
+   west init -m https://github.com/your-name/your-application your-app-worskpace
+   cd your-app-workspace
+   west update
+   ```
+
+3. Build the application, bootloader (MCUBoot), or both, using the provided Makefile. The Makefile is located in the sdk directory **NOT in the application directory**. The directory structure looks like this:
+
+   ```bash
+   ncs/v3.0.1/
+   ├── bootloader
+   ├── build
+   ├── Makefile
+   ├── modules
+   ├── nrf
+   ├── nrfxlib
+   ├── your-app-workspace
+   │   ├── boards
+   │   ├── CMakeLists.txt
+   │   ├── config
+   │   ├── inc
+   │   ├── prj.conf
+   │   ├── src
+   │   ├── sysbuild
+   │   ├── sysbuild.conf
+   │   ├── tools
+   │   ├── VERSION
+   │   └── west.yaml
+   ├── test
+   ├── tools
+   └── zephyr
+   ```
+
+The Makefile provides targets for building and flashing the application and bootloader:
 
    ```bash
    make app              # Build otau_example application
    make bootloader       # Build mcuboot bootloader
-   make combined         # Build both together
+   make all              # Build both together (default)
    make app-codechecker  # Build application with codechecker
-   ```
-
-3. Flash to the board:
-
-   ```bash
    make flash-app        # Flash application
    make flash-bootloader # Flash bootloader
-   make flash-combined   # Flash combined build
+   make flash            # Flash all (bootloader + application)
    ```
 
-4. Clean build directories:
+There are several options you can pass to the `make` command:
+
+   ```bash
+   make all VERBOSE=1 BOARD=your_board_name APP_DIR=your_app_dir
+   make flash APP_DIR=your_app_dir
+   ```
+
+   - `VERBOSE`: Show verbose output (0 or 1, default 0).
+   - `BOARD`: Target board (default: `nrf52840dk/nrf52840`).
+   - `APP_DIR`: Application directory (default: `app`).
+
+3. Clean build directories:
 
    ```bash
    make clean
    ```
 
-5. See all available targets:
+4. See all available targets:
 
    ```bash
    make help
@@ -181,12 +220,6 @@ make test
 ```
 
 Test results are saved in JUnit XML format in the respective build directories (e.g., `build/otau_example/twister_out`).
-
-**[Back to top](#table-of-contents)**
-
-## Documentation
-
-Documentation is not currently built locally (Makefile does not include a `docs` target). Check the project GitHub page for any available documentation or contribute to add a `docs` target.
 
 **[Back to top](#table-of-contents)**
 
@@ -215,35 +248,8 @@ Copyright (c) 2025 Daniel Paredes (daleonpz)
 - Uses Zephyr RTOS for real-time operation and mcuboot for OTA updates.
 
 ## Extras
-### Data Collection
-This project includes a Python-based data collection tool to gather sensor data for bruxism detection. It allows you to record normal and stress-related samples, which can be visualized later.
-
-1. Start the Python environment:
-
-   ```bash
-   nix develop .
-   ```
-
-2. Collect data:
-
-   ```bash
-   cd hardware/python
-   python datacollector.py
-   ```
-
-   - Click `record normal` or `record stress` to save 5-second samples in `normal/` or `stress/` folders.
-
-3. Visualize samples:
-
-   ```bash
-   python plot_csv.py  # Plot saved data
-   python nir_realtime_plotter.py  # Real-time visualization
-   ```
-
- **[Back to top](#table-of-contents)**
-
 ### BLE Sniffer
-This project uses BLE as a communication protocol for the wearable device. The nRF52840 Dongle can be configured as a BLE sniffer to capture and analyze Bluetooth Low Energy packets.
+This project uses BLE as a communication protocol for the wearable device. The [nRF52840 Dongle](https://www.nordicsemi.com/Products/Development-hardware/nRF52840-Dongle) can be configured as a BLE sniffer to capture and analyze Bluetooth Low Energy packets.
 
 1. Start the power profiler:
 
