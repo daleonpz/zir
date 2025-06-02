@@ -45,4 +45,4 @@ NRFTOOL_SNIFFER_FW_FILE="nrf_sniffer_for_bluetooth_le_4.1.1.zip"
 NRFTOOL_SNIFFER_FW_URL="https://nsscprodmedia.blob.core.windows.net/prod/software-and-other-downloads/desktop-software/nrf-sniffer/sw/${NRFTOOL_SNIFFER_FW_FILE}"
 
 # Variables related to nRF Connect SDK
-NRFTOOL_SDK_CONNECT_VERSION="v3.1.0"
+NRFTOOL_SDK_CONNECT_VERSION="v3.0.1"

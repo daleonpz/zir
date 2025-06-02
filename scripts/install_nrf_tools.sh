@@ -78,28 +78,28 @@ fi
 echo "     Installing nRF Sniffer for Bluetooth LE"
 ${NRFTOOLS_UTIL_EXEC} install ble-sniffer
 if [ $? -ne 0 ]; then
-    echo "Error installing BLE Sniffer. Please check the logs."
+    echo -e "\033[31mError installing BLE Sniffer. Please check the logs.\033[0m"
     exit 1
 fi
 
 echo "     Installing nRF Device tool"
 ${NRFTOOLS_UTIL_EXEC} install device
 if [ $? -ne 0 ]; then
-    echo "Error installing device. Please check the logs."
+    echo -e "\033[31mError installing Device tool. Please check the logs.\033[0m"
     exit 1
 fi
 
 echo "     Installing nRF SDK-manager"
 ${NRFTOOLS_UTIL_EXEC} install sdk-manager
 if [ $? -ne 0 ]; then
-    echo "Error installing SDK-manager. Please check the logs."
+    echo -e "\033[31mError installing SDK-manager. Please check the logs.\033[0m"
     exit 1
 fi
 
 echo "     Installing nRF Connect SDK ${NRFTOOL_SDK_CONNECT_VERSION}"
 ${NRFTOOLS_UTIL_EXEC} sdk-manager install ${NRFTOOL_SDK_CONNECT_VERSION}
 if [ $? -ne 0 ]; then
-    echo "Error installing nRF Connect SDK ${NRFTOOL_SDK_CONNECT_VERSION}. Please check the logs."
+    echo -e "\033[31mError installing nRF Connect SDK ${NRFTOOL_SDK_CONNECT_VERSION}. Please check the logs.\033[0m"
     exit 1
 fi
 
