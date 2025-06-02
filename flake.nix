@@ -83,6 +83,7 @@
             export LC_ALL=C
             pip install west
             pip install codechecker
+            sh ~/scripts/install_zephyr_sdk.sh
             sh ~/scripts/install_nrf_tools.sh
             echo -e '\033[33m Adding nrftools to PATH\033[0m'
             echo -e '\033[33m NOTE: nrftools is defined in ~/scripts/nrf_tools_config.sh\033[0m'

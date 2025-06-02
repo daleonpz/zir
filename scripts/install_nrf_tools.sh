@@ -103,6 +103,9 @@ if [ $? -ne 0 ]; then
     exit 1
 fi
 
+# NOT NECESSARY: sdk-manager installs the nRF Connect SDK and its dependencies.
+# nrfutil sdk-manager toolchain launch --ncs-version ${NRFTOOL_SDK_CONNECT_VERSION} --shell
+
 echo "     Checking if nRF rules exists"
 if [ ! -f /lib/udev/rules.d/71-nrf.rules ]; then
     echo "Downloading nRF rules..."
@@ -124,3 +127,10 @@ if [ ! -f /lib/udev/rules.d/99-mm-nrf-blacklist.rules ]; then
 else
     echo "nRF blacklist rules already exist."
 fi
+
+# NOT NECESSARY: The nRF Connect SDK already includes the necessary Python dependencies.
+# pip install -r ncs/${NRFTOOL_SDK_CONNECT_VERSION}/zephyr/scripts/requirements.txt
+# pip install -r ncs/${NRFTOOL_SDK_CONNECT_VERSION}/nrf/scripts/requirements.txt
+# pip install -r ncs/${NRFTOOL_SDK_CONNECT_VERSION}/bootloader/mcuboot/scripts/requirements.txt
+
+echo "==== nRF Tools installation completed ===="
