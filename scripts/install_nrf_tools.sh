@@ -89,19 +89,19 @@ if [ $? -ne 0 ]; then
     exit 1
 fi
 
-echo "     Installing nRF SDK-manager"
-${NRFTOOLS_UTIL_EXEC} install sdk-manager
-if [ $? -ne 0 ]; then
-    echo -e "\033[31mError installing SDK-manager. Please check the logs.\033[0m"
-    exit 1
-fi
+# echo "     Installing nRF SDK-manager"
+# ${NRFTOOLS_UTIL_EXEC} install sdk-manager
+# if [ $? -ne 0 ]; then
+#     echo -e "\033[31mError installing SDK-manager. Please check the logs.\033[0m"
+#     exit 1
+# fi
 
-echo "     Installing nRF Connect SDK ${NRFTOOL_SDK_CONNECT_VERSION}"
-${NRFTOOLS_UTIL_EXEC} sdk-manager install ${NRFTOOL_SDK_CONNECT_VERSION}
-if [ $? -ne 0 ]; then
-    echo -e "\033[31mError installing nRF Connect SDK ${NRFTOOL_SDK_CONNECT_VERSION}. Please check the logs.\033[0m"
-    exit 1
-fi
+# echo "     Installing nRF Connect SDK ${NRFTOOL_SDK_CONNECT_VERSION}"
+# ${NRFTOOLS_UTIL_EXEC} sdk-manager install ${NRFTOOL_SDK_CONNECT_VERSION}
+# if [ $? -ne 0 ]; then
+#     echo -e "\033[31mError installing nRF Connect SDK ${NRFTOOL_SDK_CONNECT_VERSION}. Please check the logs.\033[0m"
+#     exit 1
+# fi
 
 # NOT NECESSARY: sdk-manager installs the nRF Connect SDK and its dependencies.
 # nrfutil sdk-manager toolchain launch --ncs-version ${NRFTOOL_SDK_CONNECT_VERSION} --shell
