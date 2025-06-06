@@ -21,6 +21,7 @@ typescript
 .vim/
 .viminfo
 .env/
+.lesshst
 
 # Zepyhr-generated Files
 ncs/
