@@ -13,12 +13,12 @@
 # limitations under the License.
 
 #!/bin/bash
-###### MODIFY THIS VARIABLE TO CHANGE THE INSTALLATION DIRECTORY ###########
+###### MODIFY THES VARIABLES TO CHANGE THE INSTALLATION DIRECTORY ###########
 JLINK_INSTALL_DIR="${HOME}/JLink"
 NRFTOOLS_DIR="${HOME}/nrftools"
 
 # This version of JLink is required for the nRF environment to work properly.
-JLINK_VER="818"
+JLINK_VER="840"
 JLINK_DIR="JLink_Linux_V${JLINK_VER}_x86_64"
 JLINK_FILE="${JLINK_DIR}.tgz"
 JLINK_URL="https://www.segger.com/downloads/jlink/${JLINK_FILE}"
