@@ -1,4 +1,4 @@
-# Zephyr nRF Connect Development Environment
+# Nix-Based Zephyr nRF Connect Development Environment (Zir)
 
 This project is designed to be built and run using Nix, providing a reproducible development environment for Zephyr RTOS and nRF Connect SDK. It includes scripts for building the application and MCUboot bootloader.
 
@@ -52,7 +52,7 @@ To build and run this project, you need:
 1. Clone the repository
 
 ```bash
-git clone --recursive https://github.com/daleonpz/zephyr_ncs_devenv.git
+git clone --recursive https://github.com/daleonpz/zir.git
 ```
 
 2. Change to the project directory:
