@@ -1,19 +1,19 @@
+#!/bin/bash
 # Copyright 2025 Daniel Paredes (daleonpz)
-# 
+#
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
-# 
+#
 #     http://www.apache.org/licenses/LICENSE-2.0
-# 
+#
 # Unless required by applicable law or agreed to in writing, software
 # distributed under the License is distributed on an "AS IS" BASIS,
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-#!/bin/bash
 
-SCRIPT_DIR=$(cd $(dirname $0); pwd)
+SCRIPT_DIR=$(cd "$(dirname "$0")" || exit; pwd)
 echo "Script directory: ${SCRIPT_DIR}"
 source "${SCRIPT_DIR}"/nrf_tools_config.sh
 
@@ -42,7 +42,7 @@ else
     echo "JLink rules already exist in /etc/udev/rules.d/99-jlink.rules"
 fi
 
-echo "     Installing nRF Connect for Desktop in ${NRFTOOLS_DIR}" 
+echo "     Installing nRF Connect for Desktop in ${NRFTOOLS_DIR}"
 if [ ! -f "${NRFTOOLS_DIR}/${NRFTOOLS_CONNECT_APP_FILE}" ]; then
     echo "Downloading nRF Connect for Desktop installer..."
     echo "Power profiler url is ${NRFTOOLS_CONNECT_INSTALLER_URL}"
@@ -76,35 +76,32 @@ else
 fi
 
 echo "     Installing nRF Sniffer for Bluetooth LE"
-${NRFTOOLS_UTIL_EXEC} install ble-sniffer
+"${NRFTOOLS_UTIL_EXEC}" install ble-sniffer
 if [ $? -ne 0 ]; then
     echo -e "\033[31mError installing BLE Sniffer. Please check the logs.\033[0m"
     exit 1
 fi
 
 echo "     Installing nRF Device tool"
-${NRFTOOLS_UTIL_EXEC} install device
+"${NRFTOOLS_UTIL_EXEC}" install device
 if [ $? -ne 0 ]; then
     echo -e "\033[31mError installing Device tool. Please check the logs.\033[0m"
     exit 1
 fi
 
-echo "     Installing nRF SDK-manager"
-${NRFTOOLS_UTIL_EXEC} install sdk-manager
-if [ $? -ne 0 ]; then
-    echo -e "\033[31mError installing SDK-manager. Please check the logs.\033[0m"
-    exit 1
-fi
+# echo "     Installing nRF SDK-manager"
+# ${NRFTOOLS_UTIL_EXEC} install sdk-manager
+# if [ $? -ne 0 ]; then
+#     echo -e "\033[31mError installing SDK-manager. Please check the logs.\033[0m"
+#     exit 1
+# fi
 
-echo "     Installing nRF Connect SDK ${NRFTOOL_SDK_CONNECT_VERSION}"
-${NRFTOOLS_UTIL_EXEC} sdk-manager install ${NRFTOOL_SDK_CONNECT_VERSION}
-if [ $? -ne 0 ]; then
-    echo -e "\033[31mError installing nRF Connect SDK ${NRFTOOL_SDK_CONNECT_VERSION}. Please check the logs.\033[0m"
-    exit 1
-fi
-
-echo "     Copying Makefile to nRF Connect SDK directory"
-cp ${SCRIPT_DIR}/Makefile ${HOME}/ncs/${NRFTOOL_SDK_CONNECT_VERSION}/
+# echo "     Installing nRF Connect SDK ${NRFTOOL_SDK_CONNECT_VERSION}"
+# ${NRFTOOLS_UTIL_EXEC} sdk-manager install ${NRFTOOL_SDK_CONNECT_VERSION}
+# if [ $? -ne 0 ]; then
+#     echo -e "\033[31mError installing nRF Connect SDK ${NRFTOOL_SDK_CONNECT_VERSION}. Please check the logs.\033[0m"
+#     exit 1
+# fi
 
 # NOT NECESSARY: sdk-manager installs the nRF Connect SDK and its dependencies.
 # nrfutil sdk-manager toolchain launch --ncs-version ${NRFTOOL_SDK_CONNECT_VERSION} --shell
@@ -112,7 +109,7 @@ cp ${SCRIPT_DIR}/Makefile ${HOME}/ncs/${NRFTOOL_SDK_CONNECT_VERSION}/
 echo "     Checking if nRF rules exists"
 if [ ! -f /lib/udev/rules.d/71-nrf.rules ]; then
     echo "Downloading nRF rules..."
-    wget "${NRFTOOLS_RULES_URL}" -O ${SCRIPT_DIR}/71-nrf.rules
+    wget "${NRFTOOLS_RULES_URL}" -O "${SCRIPT_DIR}"/71-nrf.rules
     echo "**NOTE**: From outside nix-shell copy nRF rules to /lib/udev/rules.d/ to avoid permission issues."
     echo "         run 'sudo cp ${SCRIPT_DIR}/71-nrf.rules /lib/udev/rules.d/'"
     echo " Restart your computer to apply the changes."
@@ -123,7 +120,7 @@ fi
 echo "     Checking if nRF blacklist rules exists"
 if [ ! -f /lib/udev/rules.d/99-mm-nrf-blacklist.rules ]; then
     echo "Downloading nRF blacklist rules..."
-    wget "${NRFTOOLS_RULES_BLACKLIST_URL}" -O ${SCRIPT_DIR}/99-mm-nrf-blacklist.rules
+    wget "${NRFTOOLS_RULES_BLACKLIST_URL}" -O "${SCRIPT_DIR}"/99-mm-nrf-blacklist.rules
     echo "**NOTE**: From outside nix-shell copy nRF blacklist rules to /lib/udev/rules.d/ to avoid permission issues."
     echo "         run 'sudo cp ${SCRIPT_DIR}/99-mm-nrf-blacklist.rules /lib/udev/rules.d/'"
     echo " Restart your computer to apply the changes."
