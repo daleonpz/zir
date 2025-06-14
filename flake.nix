@@ -1,11 +1,11 @@
 # Copyright 2025 Daniel Paredes (daleonpz)
-# 
+#
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
-# 
+#
 #     http://www.apache.org/licenses/LICENSE-2.0
-# 
+#
 # Unless required by applicable law or agreed to in writing, software
 # distributed under the License is distributed on an "AS IS" BASIS,
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -19,8 +19,8 @@
     };
 
     outputs = { self, nixpkgs }:
-    
-    let 
+
+    let
         system = "x86_64-linux";
         pkgs = import nixpkgs { system = system; };
         python = pkgs.python311;
@@ -28,22 +28,21 @@
     in
     {
         devShells.${system}.default = pkgs.mkShell {
-            name = "zephyr-dev";
-            buildInputs = with pkgs; [
+        name = "zephyr-dev";
+        packages = with pkgs; [
                 cmake
                 ninja
                 gperf
                 ccache
                 dfu-util
-                dtc 
+                dtc
                 wget
                 curl
                 python
                 xz
                 file
                 gnumake
-                gcc
-                gcc_multi
+                pkgsi686Linux.gcc # for twister using native_sim
                 SDL2
                 openocd
                 which # used in zephyr sdk setup.sh
@@ -60,7 +59,7 @@
                 pythonPackages.cbor2
                 pythonPackages.pyyaml
                 pythonPackages.pytest
-                # dev tools 
+                # dev tools
                 git
                 openssh
                 tree
@@ -77,7 +76,7 @@
         shellHook = ''
             if [ ! -d .env ]; then
                 python -m venv .env
-            fi 
+            fi
             source .env/bin/activate
             export HOME=$(pwd)
             export LC_ALL=C
