@@ -87,7 +87,6 @@
             echo -e '\033[33m Adding nrftools to PATH\033[0m'
             echo -e '\033[33m NOTE: nrftools is defined in ~/scripts/nrf_tools_config.sh\033[0m'
             export PATH=$PATH:~/nrftools
-            export LD_LIBRARY_PATH=${pkgs.pkgsi686Linux.glibc}/lib:$LD_LIBRARY_PATH
             if [ ! -d /opt/SEGGER/JLink ]; then
               echo -e '\033[31m ERROR: JLink is not installed in /opt/SEGGER/JLink\033[0m'
               echo -e '\033[31m\tPlease execute the following commands outside Nix, JLink Version may vary:\033[0m'
