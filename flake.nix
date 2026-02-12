@@ -71,6 +71,15 @@
                 pythonPackages.matplotlib
                 pythonPackages.pandas
                 pythonPackages.scipy
+                # for pytest
+                pythonPackages.natsort
+                pythonPackages.junitparser
+                pythonPackages.ply
+                pythonPackages.anytree
+                pythonPackages.pykwalify
+                pythonPackages.psutil
+                pythonPackages.tabulate
+                go
             ];
 
         shellHook = ''
@@ -93,6 +102,11 @@
               echo -e '\033[31m\t\tsudo mkdir -p /opt/SEGGER/JLink\033[0m'
               echo -e '\033[31m\t\tsudo ln -sf ~/JLink/JLink_Linux_V818_x86_64/* /opt/SEGGER/JLink/\033[0m'
             fi
+            echo -e '\033[33m Installing mcumgr...\033[0m'
+            go install github.com/apache/mynewt-mcumgr-cli/mcumgr@latest
+            echo -e '\033[33m Installing raiz (Requirements tool)...\033[0m'
+            pip install raiz
+            export PATH=$PATH:$HOME/go/bin
             echo -e '\033[32m Zephyr development environment is ready!\033[0m'
             echo -e '\033[32m You can now run west commands or build your projects.\033[0m'
             echo -e '\033[5;1;32m ==== NOTE: Place your app/ under ncs/<sdk_version> directory.====\033[0m'
