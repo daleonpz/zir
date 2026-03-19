@@ -91,6 +91,9 @@
             export LC_ALL=C
             pip install west
             pip install codechecker
+            pip install sphinx
+            pip install sphinx-rtd-theme
+            pip install sphinxcontrib-mermaid
             sh ~/scripts/install_zephyr_sdk.sh
             sh ~/scripts/install_nrf_tools.sh
             echo -e '\033[33m Adding nrftools to PATH\033[0m'
