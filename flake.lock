@@ -42,16 +42,16 @@
         ]
       },
       "locked": {
-        "lastModified": 1788810636,
-        "narHash": "sha256-eCMFLgHe3I07Enlj1s2UQOvYtZUdS/tyEkRoLhAM6+Q=",
+        "lastModified": 1789203123,
+        "narHash": "sha256-6zfqsLf/ClJsyuoWsc4mPbAt6/9aAoy2z7pNiO2XC+g=",
         "owner": "daleonpz",
         "repo": "raiz",
-        "rev": "3c8c9119ba0adf12bd6b8a0989dfb9fc15f393dd",
+        "rev": "cb7926f4184d91bc7a946e5982ec2158eab30969",
         "type": "github"
       },
       "original": {
         "owner": "daleonpz",
-        "ref": "feat/packaging",
+        "ref": "main",
         "repo": "raiz",
         "type": "github"
       }

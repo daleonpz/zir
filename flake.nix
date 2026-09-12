@@ -17,7 +17,7 @@
     inputs = {
       nixpkgs.url = "github:nixos/nixpkgs/nixos-25.11";
       raiz = {
-        url = "github:daleonpz/raiz/feat/packaging";
+        url = "github:daleonpz/raiz/main";
         inputs.nixpkgs.follows = "nixpkgs";
       };
     };
