@@ -15,16 +15,20 @@
     description = "Flake for nRF Connect SDK development";
 
     inputs = {
-        nixpkgs.url = "github:nixos/nixpkgs/nixos-24.11";
+      nixpkgs.url = "github:nixos/nixpkgs/nixos-25.11";
+      raiz = {
+        url = "github:daleonpz/raiz/main";
+        inputs.nixpkgs.follows = "nixpkgs";
+      };
     };
 
-    outputs = { self, nixpkgs }:
+    outputs = { self, nixpkgs, raiz }:
 
     let
         system = "x86_64-linux";
         pkgs = import nixpkgs { system = system; };
-        python = pkgs.python311;
-        pythonPackages = pkgs.python311Packages;
+        python = pkgs.python313;
+        pythonPackages = pkgs.python313Packages;
     in
     {
         devShells.${system}.default = pkgs.mkShell {
@@ -47,6 +51,7 @@
                 openocd
                 which # used in zephyr sdk setup.sh
                 cacert # used in zephyr sdk
+                gcovr
                 pythonPackages.pip
                 pythonPackages.setuptools
                 pythonPackages.wheel
@@ -80,20 +85,19 @@
                 pythonPackages.psutil
                 pythonPackages.tabulate
                 go
+                # zephyr
+                pythonPackages.sphinx
+                pythonPackages.sphinx-rtd-theme
+                pythonPackages.sphinxcontrib-mermaid
+                pythonPackages.west
+                codechecker
+                # raiz
+                raiz.packages.${system}.raiz
             ];
 
         shellHook = ''
-            if [ ! -d .env ]; then
-                python -m venv .env
-            fi
-            source .env/bin/activate
             export HOME=$(pwd)
             export LC_ALL=C
-            pip install west
-            pip install codechecker
-            pip install sphinx
-            pip install sphinx-rtd-theme
-            pip install sphinxcontrib-mermaid
             sh ~/scripts/install_zephyr_sdk.sh
             sh ~/scripts/install_nrf_tools.sh
             echo -e '\033[33m Adding nrftools to PATH\033[0m'
@@ -108,7 +112,6 @@
             echo -e '\033[33m Installing mcumgr...\033[0m'
             go install github.com/apache/mynewt-mcumgr-cli/mcumgr@latest
             echo -e '\033[33m Installing raiz (Requirements tool)...\033[0m'
-            pip install raiz
             export PATH=$PATH:$HOME/go/bin
             echo -e '\033[32m Zephyr development environment is ready!\033[0m'
             echo -e '\033[32m You can now run west commands or build your projects.\033[0m'
