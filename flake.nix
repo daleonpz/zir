@@ -68,6 +68,7 @@
                 git
                 openssh
                 tree
+                pre-commit
                 # cmake tools
                 pythonPackages.lizard
                 # hardware tools
